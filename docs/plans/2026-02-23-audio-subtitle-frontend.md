@@ -6,7 +6,7 @@
 
 **Architecture:** AudioUploader 上傳檔案取得 task_id，useTranscription hook 透過 EventSource 接收 SSE 字幕段落，AudioPlayer 每 timeupdate 事件比對 currentTime 與 segment 時間範圍，顯示對應字幕。
 
-**Tech Stack:** React 18, TypeScript, Vite, Vitest, React Testing Library
+**Tech Stack:** React 18, TypeScript, Vite, Tailwind CSS v4, Vitest, React Testing Library
 
 **工作目錄:** `audio-file-script/`（在此建立 `frontend/` 子目錄）
 
@@ -29,11 +29,12 @@
 
 ---
 
-## Task 5：前端專案初始化
+## Task 5：前端專案初始化 + Tailwind 設定
 
 **Files:**
 - Create: `frontend/`（由 Vite 產生）
 - Modify: `frontend/vite.config.ts`
+- Modify: `frontend/src/index.css`
 - Create: `frontend/src/test-setup.ts`
 
 **Step 1: 建立專案**
@@ -42,17 +43,31 @@
 npm create vite@latest frontend -- --template react-ts
 cd frontend
 npm install
+```
+
+**Step 2: 安裝 Tailwind CSS v4（Vite plugin）**
+
+```bash
+cd frontend
+npm install tailwindcss @tailwindcss/vite
+```
+
+**Step 3: 安裝測試依賴**
+
+```bash
+cd frontend
 npm install -D vitest @vitest/ui jsdom @testing-library/react @testing-library/jest-dom @testing-library/user-event
 ```
 
-**Step 2: 替換 `frontend/vite.config.ts`**
+**Step 4: 替換 `frontend/vite.config.ts`**
 
 ```typescript
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
+import tailwindcss from "@tailwindcss/vite";
 
 export default defineConfig({
-  plugins: [react()],
+  plugins: [react(), tailwindcss()],
   test: {
     globals: true,
     environment: "jsdom",
@@ -66,20 +81,26 @@ export default defineConfig({
 });
 ```
 
-**Step 3: 建立 `frontend/src/test-setup.ts`**
+**Step 5: 替換 `frontend/src/index.css`**
+
+```css
+@import "tailwindcss";
+```
+
+**Step 6: 建立 `frontend/src/test-setup.ts`**
 
 ```typescript
 import "@testing-library/jest-dom";
 ```
 
-**Step 4: 在 `frontend/package.json` 的 scripts 新增**
+**Step 7: 在 `frontend/package.json` 的 scripts 新增**
 
 ```json
 "test": "vitest run",
 "test:watch": "vitest"
 ```
 
-**Step 5: 驗證測試環境**
+**Step 8: 驗證測試環境**
 
 ```bash
 cd frontend && npm test
@@ -87,11 +108,11 @@ cd frontend && npm test
 
 Expected: "No test files found"（無錯誤）
 
-**Step 6: Commit**
+**Step 9: Commit**
 
 ```bash
 git add frontend/
-git commit -m "[Feature] 初始化 React TypeScript 前端專案"
+git commit -m "[Feature] 初始化 React TypeScript 前端專案（含 Tailwind CSS v4）"
 ```
 
 ---
@@ -172,8 +193,8 @@ export default function SubtitleDisplay({ segments, currentTime, isTranscribing 
   const text = active ? active.text : isTranscribing ? "轉錄中..." : "";
 
   return (
-    <div className="subtitle-container">
-      <p className="subtitle-text">{text}</p>
+    <div className="flex items-center justify-center min-h-16 bg-gray-900 rounded-lg px-4 py-3">
+      <p className="text-white text-xl text-center leading-relaxed m-0">{text}</p>
     </div>
   );
 }
@@ -466,18 +487,24 @@ export default function AudioUploader({ onUploaded }: Props) {
   };
 
   return (
-    <div className="uploader">
-      <p>上傳音檔</p>
-      <label htmlFor="audio-input">選擇音檔</label>
+    <div className="border-2 border-dashed border-gray-300 rounded-xl p-8 text-center mb-8">
+      <p className="text-gray-600 mb-3">上傳音檔</p>
+      <label
+        htmlFor="audio-input"
+        className="inline-block px-5 py-2 bg-blue-600 text-white rounded-lg cursor-pointer hover:bg-blue-700 transition-colors"
+      >
+        選擇音檔
+      </label>
       <input
         id="audio-input"
         type="file"
         accept=".mp3,.wav"
         onChange={handleChange}
         disabled={uploading}
+        className="hidden"
       />
-      {uploading && <p>上傳中...</p>}
-      {error && <p className="error">{error}</p>}
+      {uploading && <p className="mt-3 text-gray-500">上傳中...</p>}
+      {error && <p className="mt-3 text-red-500">{error}</p>}
     </div>
   );
 }
@@ -564,8 +591,14 @@ export default function AudioPlayer({ audioUrl, segments, isTranscribing }: Prop
   };
 
   return (
-    <div aria-label="audio player" role="region">
-      <audio ref={audioRef} src={audioUrl} controls onTimeUpdate={handleTimeUpdate} />
+    <div aria-label="audio player" role="region" className="space-y-4">
+      <audio
+        ref={audioRef}
+        src={audioUrl}
+        controls
+        onTimeUpdate={handleTimeUpdate}
+        className="w-full"
+      />
       <SubtitleDisplay
         segments={segments}
         currentTime={currentTime}
@@ -597,7 +630,7 @@ git commit -m "[Feature] 新增 AudioPlayer 組件"
 
 **Files:**
 - Modify: `frontend/src/App.tsx`
-- Modify: `frontend/src/App.css`
+- Modify: `frontend/src/App.css`（清空，樣式全由 Tailwind 處理）
 - Modify: `frontend/index.html`
 
 **Step 1: 替換 `frontend/src/App.tsx`**
@@ -607,7 +640,6 @@ import { useState } from "react";
 import AudioUploader from "./components/AudioUploader";
 import AudioPlayer from "./components/AudioPlayer";
 import { useTranscription } from "./hooks/useTranscription";
-import "./App.css";
 
 export default function App() {
   const [taskId, setTaskId] = useState<string | null>(null);
@@ -620,10 +652,12 @@ export default function App() {
   };
 
   return (
-    <main>
-      <h1>音檔字幕播放器</h1>
+    <main className="max-w-2xl mx-auto px-6 py-10 font-sans">
+      <h1 className="text-2xl font-bold mb-6 text-gray-800">音檔字幕播放器</h1>
       <AudioUploader onUploaded={handleUploaded} />
-      {error && <p className="error">轉錄錯誤：{error}</p>}
+      {error && (
+        <p className="mb-4 text-red-500">轉錄錯誤：{error}</p>
+      )}
       {audioUrl && (
         <AudioPlayer
           audioUrl={audioUrl}
@@ -636,68 +670,10 @@ export default function App() {
 }
 ```
 
-**Step 2: 替換 `frontend/src/App.css`**
+**Step 2: 清空 `frontend/src/App.css`**
 
 ```css
-main {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 2rem;
-  font-family: sans-serif;
-}
-
-h1 {
-  margin-bottom: 1.5rem;
-}
-
-.uploader {
-  border: 2px dashed #ccc;
-  padding: 2rem;
-  text-align: center;
-  margin-bottom: 2rem;
-  border-radius: 8px;
-}
-
-.uploader label {
-  display: inline-block;
-  margin: 0.5rem;
-  padding: 0.5rem 1rem;
-  background: #0066cc;
-  color: white;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.uploader input[type="file"] {
-  display: none;
-}
-
-audio {
-  width: 100%;
-  margin-bottom: 1rem;
-}
-
-.subtitle-container {
-  min-height: 4rem;
-  background: #111;
-  border-radius: 6px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0.5rem;
-}
-
-.subtitle-text {
-  color: #fff;
-  font-size: 1.2rem;
-  text-align: center;
-  margin: 0;
-  line-height: 1.5;
-}
-
-.error {
-  color: #cc0000;
-}
+/* 樣式由 Tailwind CSS 處理，見 index.css */
 ```
 
 **Step 3: 修改 `frontend/index.html` 標題**
