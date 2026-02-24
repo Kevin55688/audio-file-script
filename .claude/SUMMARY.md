@@ -1,6 +1,6 @@
 # 專案狀態摘要
 
-**最後更新：** 2026-02-24（後端 Task 1 完成）
+**最後更新：** 2026-02-24
 
 ---
 
@@ -12,7 +12,7 @@
 
 ---
 
-## 整體進度：Task 4/10 完成
+## 整體進度：Task 5/10 完成
 
 ---
 
@@ -24,7 +24,6 @@
 - [ ] Task 4：SSE 字幕串流端點（GET /api/transcribe/{task_id}）
 
 ### 前端（`frontend/`）
-- [ ] Task 8：AudioUploader 組件
 - [ ] Task 9：AudioPlayer 組件
 - [ ] Task 10：App 整合
 
@@ -36,6 +35,7 @@
 - ✅ Task 5：前端專案初始化 + Tailwind CSS v4 設定（含 Warm Archive 設計主題）
 - ✅ Task 6：共用型別（types.ts）+ SubtitleDisplay 組件（電影字幕風格）
 - ✅ Task 7：useTranscription SSE Hook
+- ✅ Task 8：AudioUploader 組件（波形動畫 + 拖曳上傳）
 
 ---
 
@@ -46,3 +46,4 @@
 - 前端 Tailwind CSS 採用 v4（Vite plugin 方式整合，`@import "tailwindcss"`）
 - 轉錄完成後刪除 temp/ 暫存音檔
 - 前端 UI 採用 **Warm Archive** 設計主題：暖棕黑底色 + 琥珀金強調色 + DM Serif Display / Outfit / Space Mono 字型
+- `<input type="file">` 不使用 `accept` 屬性（user-event v14.6.1 的 `applyAccept` 預設為 `true`，會攔截非音訊格式的測試檔案）；格式驗證交由後端處理
