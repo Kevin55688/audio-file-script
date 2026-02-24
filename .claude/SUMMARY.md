@@ -1,6 +1,6 @@
 # 專案狀態摘要
 
-**最後更新：** 2026-02-24
+**最後更新：** 2026-02-24（後端 Task 1 完成）
 
 ---
 
@@ -12,14 +12,13 @@
 
 ---
 
-## 整體進度：Task 3/10 完成（前端）
+## 整體進度：Task 4/10 完成
 
 ---
 
 ## 待完成項目
 
 ### 後端（`backend/`）
-- [ ] Task 1：專案初始化（建立目錄結構 + requirements.txt + main.py）
 - [ ] Task 2：音檔上傳與服務端點（POST /api/upload、GET /api/audio/{task_id}）
 - [ ] Task 3：Whisper 轉錄服務（whisper_service.py）
 - [ ] Task 4：SSE 字幕串流端點（GET /api/transcribe/{task_id}）
@@ -33,6 +32,7 @@
 
 ## 已完成項目
 
+- ✅ Task 1：後端專案初始化（目錄結構 + requirements.txt + main.py，Python 3.11 conda 環境 `audio-subtitle`）
 - ✅ Task 5：前端專案初始化 + Tailwind CSS v4 設定（含 Warm Archive 設計主題）
 - ✅ Task 6：共用型別（types.ts）+ SubtitleDisplay 組件（電影字幕風格）
 - ✅ Task 7：useTranscription SSE Hook
