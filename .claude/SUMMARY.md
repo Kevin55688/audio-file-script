@@ -12,7 +12,7 @@
 
 ---
 
-## 整體進度：Task 1/10 完成（前端）
+## 整體進度：Task 2/10 完成（前端）
 
 ---
 
@@ -25,7 +25,6 @@
 - [ ] Task 4：SSE 字幕串流端點（GET /api/transcribe/{task_id}）
 
 ### 前端（`frontend/`）
-- [ ] Task 6：共用型別 + SubtitleDisplay 組件
 - [ ] Task 7：useTranscription Hook（SSE 接收）
 - [ ] Task 8：AudioUploader 組件
 - [ ] Task 9：AudioPlayer 組件
@@ -36,6 +35,7 @@
 ## 已完成項目
 
 - ✅ Task 5：前端專案初始化 + Tailwind CSS v4 設定（含 Warm Archive 設計主題）
+- ✅ Task 6：共用型別（types.ts）+ SubtitleDisplay 組件（電影字幕風格）
 
 ---
 
