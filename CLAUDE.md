@@ -2,10 +2,8 @@
 
 ## 啟動流程（每次新 Session 必讀）
 
-1. **閱讀專案狀態**：讀取 `.claude/SUMMARY.md` 了解專案整體狀態與待辦事項
+1. **閱讀專案狀態**：讀取 `.claude/SUMMARY.md` 了解當前進行中功能與待辦 Tasks
 2. **確認工作項目**：根據 SUMMARY 中的待辦清單，詢問使用者要處理哪個項目
-
-> **注意**：HISTORY.md 僅在需要查詢歷史細節時才讀取，平時不必載入以節省 token
 
 ## 程式碼規範（生成程式碼前必讀）
 
@@ -31,80 +29,22 @@
 
 ⚠️ **在回報「完成」之前，必須確認：**
 
-1. [ ] 已更新 `.claude/HISTORY.md`（新增本次變更紀錄）
-2. [ ] 已更新 `.claude/SUMMARY.md`（**每完成一個 Task 都必須立即更新**，不等用戶提醒）
-3. 確認程式碼是否有符合設計規範
+1. [ ] 已更新 `.claude/SUMMARY.md`（**每完成一個 Task 都必須立即更新**，不等用戶提醒）
+2. [ ] 確認程式碼是否有符合設計規範
 
 **SUMMARY.md 更新內容（每個 Task 完成後）：**
-- 將該 Task 從 `[ ]` 改為 `[x]`，並移至「已完成項目」清單（含日期）
-- 更新專案狀態標題（例：Task 3/12 完成）
+- 將該 Task 從待辦清單中**直接移除**
+- 若該功能所有 Tasks 完成，清空待辦清單並更新「當前進行中功能」
 - 更新「最後更新」日期
+
+> ℹ️ 已完成 Task 的詳細記錄請查 `git log`；設計決策請查對應 plan 文件。
 
 **Commit 順序規定：**
 
 > ⚠️ **必須先更新 SUMMARY.md，再執行 git commit。**
-> 不可先 commit 程式碼、再更新 SUMMARY.md，否則會產生額外的 chore commit。
 > 正確順序：測試通過 → 更新 SUMMARY.md → `git add`（含 SUMMARY.md）→ `git commit`
 
 **無論任務大小（包含 bug 修復、緊急修復），都必須執行此檢查。**
-
-> 這是強制性流程，不可跳過。若忘記執行，用戶有權要求補做。
-
-## Session 結束流程
-
-每次對話結束或完成重要工作後，必須更新以下檔案：
-
-### 1. 更新 `.claude/HISTORY.md`
-
-在檔案**最上方**新增一筆紀錄，格式如下：
-
-> **時間格式**：使用台北時間 (UTC+8)，24 小時制
-
-```markdown
-## [YYYY-MM-DD HH:mm] @開發者名稱
-
-### 處理項目
-
-- 項目名稱或任務描述
-
-### 實作方式
-
-- 具體做了什麼
-- 修改了哪些檔案
-- 使用了什麼技術或方法
-
-### 變更檔案
-
-- `path/to/file1.ts` - 變更說明
-- `path/to/file2.tsx` - 變更說明
-
----
-```
-
-### 2. 更新 `.claude/SUMMARY.md`
-
-更新專案狀態摘要：
-
-- 專案當前狀態
-- 已完成項目清單（含日期，作為長期紀錄）
-- 待完成項目清單
-- 重要決策與架構變更
-
-### 3. 歸檔機制（當 HISTORY.md 超過 15 筆）
-
-當 HISTORY.md 紀錄超過 15 筆時，執行歸檔：
-
-1. 保留最近 10 筆在 `HISTORY.md`
-2. 將較舊的紀錄移至 `.claude/archive/HISTORY-YYYY-MM.md`
-3. 確保 SUMMARY.md 已包含被歸檔項目的摘要
-
-```
-.claude/
-├── SUMMARY.md          # 必讀 - 專案狀態摘要
-├── HISTORY.md          # 最近 10-15 筆紀錄
-└── archive/
-    └── HISTORY-YYYY-MM.md  # 歸檔紀錄
-```
 
 ## 多人協作規範
 
@@ -159,3 +99,6 @@ audio-file-script/
 3. 技術棧：React + TypeScript + Tailwind CSS
 
 > ⚠️ **強制規定**：前端 UI 設計前必須呼叫 `frontend-design` skill，不可跳過。
+
+# currentDate
+Today's date is 2026-02-24.

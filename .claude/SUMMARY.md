@@ -1,6 +1,6 @@
 # 專案狀態摘要
 
-**最後更新：** 2026-02-24
+**最後更新：** 2026-02-24（新增開發規範 `.claude/skills.md`）
 
 ---
 
@@ -36,6 +36,12 @@
 - ✅ Task 6：共用型別（types.ts）+ SubtitleDisplay 組件（電影字幕風格）
 - ✅ Task 7：useTranscription SSE Hook
 - ✅ Task 8：AudioUploader 組件（波形動畫 + 拖曳上傳）
+
+---
+
+## 開發規範
+
+- 通用規範、Python/FastAPI 規範、React/TypeScript 規範、AI 輔助流程詳見 `.claude/skills.md`
 
 ---
 
