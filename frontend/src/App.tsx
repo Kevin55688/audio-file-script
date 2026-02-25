@@ -14,7 +14,7 @@ export default function App() {
   };
 
   return (
-    <div
+    <main
       style={{ backgroundColor: "#0E0D0B", minHeight: "100vh" }}
       className="px-6 py-12"
     >
@@ -88,6 +88,6 @@ export default function App() {
           </div>
         )}
       </div>
-    </div>
+    </main>
   );
 }
