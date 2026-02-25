@@ -1,6 +1,6 @@
 # 專案狀態摘要
 
-**最後更新：** 2026-02-25（完成 Task 9：AudioPlayer 組件）
+**最後更新：** 2026-02-25（完成 Task 10：App 整合）
 
 ---
 
@@ -12,18 +12,14 @@
 
 ---
 
-## 整體進度：Task 7/10 完成
+## 整體進度：Task 8/10 完成
 
 ---
 
 ## 待完成項目
 
 ### 後端（`backend/`）
-- [ ] Task 3：Whisper 轉錄服務（whisper_service.py）
 - [ ] Task 4：SSE 字幕串流端點（GET /api/transcribe/{task_id}）
-
-### 前端（`frontend/`）
-- [ ] Task 10：App 整合
 
 ---
 
@@ -36,6 +32,8 @@
 - ✅ Task 8：AudioUploader 組件（波形動畫 + 拖曳上傳）
 - ✅ Task 2：音檔上傳與服務端點（POST /api/upload、GET /api/audio/{task_id}）
 - ✅ Task 9：AudioPlayer 組件（Warm Archive 設計 + SubtitleDisplay 整合）
+- ✅ Task 3：Whisper 轉錄服務（whisper_service.py）
+- ✅ Task 10：App 整合（Warm Archive 頁面設計 + 組件串接）
 
 ---
 
