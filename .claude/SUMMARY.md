@@ -1,6 +1,6 @@
 # 專案狀態摘要
 
-**最後更新：** 2026-02-24（新增開發規範 `.claude/skills.md`）
+**最後更新：** 2026-02-25（完成 Task 2：音檔上傳與服務端點）
 
 ---
 
@@ -12,14 +12,13 @@
 
 ---
 
-## 整體進度：Task 5/10 完成
+## 整體進度：Task 6/10 完成
 
 ---
 
 ## 待完成項目
 
 ### 後端（`backend/`）
-- [ ] Task 2：音檔上傳與服務端點（POST /api/upload、GET /api/audio/{task_id}）
 - [ ] Task 3：Whisper 轉錄服務（whisper_service.py）
 - [ ] Task 4：SSE 字幕串流端點（GET /api/transcribe/{task_id}）
 
@@ -36,6 +35,7 @@
 - ✅ Task 6：共用型別（types.ts）+ SubtitleDisplay 組件（電影字幕風格）
 - ✅ Task 7：useTranscription SSE Hook
 - ✅ Task 8：AudioUploader 組件（波形動畫 + 拖曳上傳）
+- ✅ Task 2：音檔上傳與服務端點（POST /api/upload、GET /api/audio/{task_id}）
 
 ---
 
