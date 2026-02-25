@@ -4,6 +4,7 @@ from pathlib import Path
 
 from fastapi import APIRouter, HTTPException, UploadFile, File
 from fastapi.responses import FileResponse, StreamingResponse
+from services.whisper_service import transcribe_audio
 
 router = APIRouter()
 
@@ -45,3 +46,24 @@ async def serve_audio(task_id: str):
     if file_path is None:
         raise HTTPException(status_code=404, detail="找不到音檔")
     return FileResponse(file_path)
+
+
+@router.get("/transcribe/{task_id}")
+async def transcribe_endpoint(task_id: str):
+    file_path = _find_audio_file(task_id)
+    if file_path is None:
+        raise HTTPException(status_code=404, detail="找不到音檔")
+
+    def event_stream():
+        try:
+            for segment in transcribe_audio(str(file_path)):
+                yield f"data: {json.dumps(segment, ensure_ascii=False)}\n\n"
+            yield f"data: {json.dumps({'status': 'done'})}\n\n"
+        except Exception as e:
+            yield f"data: {json.dumps({'status': 'error', 'message': str(e)})}\n\n"
+
+    return StreamingResponse(
+        event_stream(),
+        media_type="text/event-stream",
+        headers={"Cache-Control": "no-cache", "X-Accel-Buffering": "no"},
+    )

@@ -1,6 +1,6 @@
 # 專案狀態摘要
 
-**最後更新：** 2026-02-25（完成 Task 10：App 整合）
+**最後更新：** 2026-02-25（完成 Task 4：SSE 字幕串流端點，全部 10 Tasks 完成）
 
 ---
 
@@ -12,14 +12,13 @@
 
 ---
 
-## 整體進度：Task 9/10 完成
+## 整體進度：Task 10/10 完成 🎉
 
 ---
 
 ## 待完成項目
 
-### 後端（`backend/`）
-- [ ] Task 4：SSE 字幕串流端點（GET /api/transcribe/{task_id}）
+（無）
 
 ---
 
@@ -34,6 +33,7 @@
 - ✅ Task 9：AudioPlayer 組件（Warm Archive 設計 + SubtitleDisplay 整合）
 - ✅ Task 3：Whisper 轉錄服務（whisper_service.py）
 - ✅ Task 10：App 整合（Warm Archive 頁面設計 + 組件串接）
+- ✅ Task 4：SSE 字幕串流端點（GET /api/transcribe/{task_id}，9 tests pass）
 
 ---
 
