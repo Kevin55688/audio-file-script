@@ -1,0 +1,22 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.pytest_cache/
+
+# Backend temp audio files
+backend/temp/*.mp3
+backend/temp/*.wav
+
+# Node
+node_modules/
+dist/
+.vite/
+
+# Env
+.env
+.env.local
+
+# OS
+.DS_Store
+Thumbs.db
